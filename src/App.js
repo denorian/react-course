@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header/Header.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Dialogs from "./components/Dialogs/Dialogs.jsx";
+import {BrowserRouter, Route} from "react-router-dom";
+import Profile from "./components/Profile/Profile";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        // eslint-disable-next-line react/jsx-no-undef
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path='/dialogs' component={Dialogs}/>
+                    <Route path='/profile' component={Profile}/>
+                    <Route path='/news'>
+                        this is news
+                    </Route>
+
+                </div>
+            </div>
+        </BrowserRouter>
+    );
+};
+
 
 export default App;
