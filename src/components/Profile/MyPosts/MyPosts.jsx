@@ -3,12 +3,13 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-    let postElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+    let postsElements = props.postData.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef()
 
     let addPost = () => {
         alert(newPostElement.current.value);
+        props.addPost(newPostElement.current.value);
     }
 
     return (
@@ -22,7 +23,7 @@ const MyPosts = (props) => {
                 <button onClick={addPost}>add</button>
             </div>
             <div className={s.posts}>
-                {postElements}
+                {postsElements}
             </div>
         </div>
     );

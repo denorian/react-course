@@ -1,7 +1,7 @@
-.item {
+.itemPost {
     color: black;
 }
-.item img{
+.itemPost img{
     height: 40px;
     border-radius: 5px;
 }
