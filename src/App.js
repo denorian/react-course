@@ -8,26 +8,26 @@ import Profile from "./components/Profile/Profile";
 
 const App = (props) => {
     return (
-        // eslint-disable-next-line react/jsx-no-undef
-        <div className="app-wrapper">
-            <Header/>
-            <Navbar/>
-            <div className="app-wrapper-content">
-                <Route path='/dialogs'
-                       render={() => <Dialogs state={props.state}
-                                              dispatch={props.dispatch}/>}/>
-                <Route path='/profile'
-                       render={() => <Profile
-                           state={props.state}
-                           addPost={props.addPost}
-                           dispatch={props.dispatch}
-                       />}/>
-                <Route path='/news'>
-                    this is news
-                </Route>
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path='/dialogs'
+                           render={() => <Dialogs state={props.state}
+                                                  dispatch={props.dispatch}/>}/>
+                    <Route path='/profile'
+                           render={() => <Profile
+                               state={props.state}
+                               dispatch={props.dispatch}
+                           />}/>
+                    <Route path='/news'>
+                        this is news
+                    </Route>
 
+                </div>
             </div>
-        </div>
+        </BrowserRouter>
     );
 };
 
