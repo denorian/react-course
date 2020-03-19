@@ -1,21 +1,21 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../../state/profile-reducer";
 
 const MyPosts = (props) => {
-    let postsElements = props.state.profilePage.posts.map(
+
+    let postsElements = props.posts.map(
         p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>
     );
 
     let newPostElement = React.createRef();
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
+    let onAddPost = () => {
+        props.addPost();
     };
 
     let onPostChange = () => {
-        props.dispatch(onPostChangeActionCreator(newPostElement.current.value));
+        props.updateNewPostText(newPostElement.current.value)
     };
 
     return (
@@ -24,10 +24,10 @@ const MyPosts = (props) => {
             <div>New posts</div>
             <div>
                 <textarea ref={newPostElement} onChange={onPostChange}
-                          value={props.state.profilePage.newPostText}/>
+                          value={props.newPostText}/>
             </div>
             <div>
-                <button onClick={addPost}>add</button>
+                <button onClick={onAddPost}>add</button>
             </div>
             <div className={s.posts}>
                 {postsElements}
