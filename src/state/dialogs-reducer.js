@@ -9,7 +9,7 @@ let initialState = {
         {id: 4, name: "Marat"},
         {id: 5, name: "Ignat"}
     ],
-    messsageData: [
+    messages: [
         {id: 1, message: "Hi!"},
         {id: 2, message: "Hello"},
         {id: 3, message: "How are you?"},
@@ -22,20 +22,17 @@ let initialState = {
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.body;
-            return stateCopy;
-        }
-        case SEND_MESSAGE:{
-            let stateCopy = {...state};
-            stateCopy.messsageData = [...state.messsageData];
-            let messsage = {
-                id: 8,
-                message: stateCopy.newMessageText
+            return {
+                ...state,
+                newMessageText: action.body
             };
-            stateCopy.messsageData.push(messsage);
-            stateCopy.newMessageText = "";
-            return stateCopy;
+        }
+        case SEND_MESSAGE: {
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: 8, message: state.newMessageText}]
+            };
         }
         default:
             return state;

@@ -5,7 +5,7 @@ import Message from "./Message/Message.jsx";
 
 const Dialogs = (props) => {
     let dialogElement = props.dialogsPage.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>);
-    let messageElement = props.dialogsPage.messsageData.map(m => <Message message={m.message}/>);
+    let messageElement = props.dialogsPage.messages.map(m => <Message message={m.message}/>);
     let newMessageBody = props.dialogsPage.newMessageText;
 
     let sendMessage = () => {
