@@ -1,9 +1,8 @@
 import s from "./Users.module.css";
 import React from "react";
+import defaultImage from '../../assets/images/cat.jpg'
 
 let Users = (props) => {
-
-    const defaultImg = "https://d2hhj3gz5jljkm.cloudfront.net/assets2/144/105/615/616/normal/88005553535.jpg";
 
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -27,7 +26,7 @@ let Users = (props) => {
                         <div>
                              <img className={s.userPhoto}
                                   alt="cat"
-                                  src={u.photos.small != null ? u.photos.small : defaultImg}/>
+                                  src={u.photos.small != null ? u.photos.small : defaultImage}/>
                         </div>
                         <div>
                             {
