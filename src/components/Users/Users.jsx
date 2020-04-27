@@ -1,6 +1,7 @@
 import s from "./Users.module.css";
 import React from "react";
 import defaultImage from '../../assets/images/cat.jpg'
+import {NavLink} from "react-router-dom";
 
 let Users = (props) => {
 
@@ -24,9 +25,11 @@ let Users = (props) => {
             <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={'/profile/' + u.id}>
                              <img className={s.userPhoto}
                                   alt="cat"
                                   src={u.photos.small != null ? u.photos.small : defaultImage}/>
+                            </NavLink>
                         </div>
                         <div>
                             {

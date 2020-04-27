@@ -12,7 +12,6 @@ import {
 } from "../../redux/user-reducer";
 import Preloader from "../common/Preloader/Preloader";
 
-
 class UsersContainer extends React.Component {
 
     componentDidMount() {
@@ -22,9 +21,7 @@ class UsersContainer extends React.Component {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(responce.data.items);
                 this.props.setTotalUsersCount(responce.data.totalCount);
-
             });
-
     }
 
     onPageChanged = (p) => {
@@ -36,7 +33,6 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(responce.data.items);
                 this.props.setTotalUsersCount(responce.data.totalCount);
             });
-
     };
 
     render() {
