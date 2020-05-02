@@ -2,7 +2,7 @@ import s from "./Users.module.css";
 import React from "react";
 import defaultImage from '../../assets/images/cat.jpg'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followUser, unfollowUser} from "../../api/api";
 
 let Users = (props) => {
 
@@ -12,7 +12,7 @@ let Users = (props) => {
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
     }
-debugger;
+
     return <div className={s.content}>
         <div>
             {pages.map(p => {
@@ -22,61 +22,43 @@ debugger;
                              }}>{p}</span>
             })}
         </div>
-        {props.users.map(u =>
-            <div key={u.id}>
+        {props.users.map(user =>
+            <div key={user.id}>
                     <span>
                         <div>
-                            <NavLink to={'/profile/' + u.id}>
+                            <NavLink to={'/profile/' + user.id}>
                              <img className={s.userPhoto}
                                   alt="cat"
-                                  src={u.photos.small != null ? u.photos.small : defaultImage}/>
+                                  src={user.photos.small != null ? user.photos.small : defaultImage}/>
                             </NavLink>
                         </div>
                         <div>
                             {
-                                u.followed ?
+                                user.followed ?
                                     <button onClick={() => (
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": 'a40e873c-c776-4809-b8b4-dedf442550b3'
-                                                }
-                                            }).then(responce => {
-                                                if (responce.data.resultCode === 0) {
-                                                    props.unfollow(u.id);
-                                                }
-                                            })
+                                        unfollowUser(user.id).then(responce => {
+                                            if (responce.resultCode === 0) {
+                                                props.unfollow(user.id);
+                                            }
+                                        })
 
-                                        )}>unfollow</button> :
+                                    )}>unfollow</button> :
                                     <button onClick={() => (
-
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {},
-                                            {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": 'a40e873c-c776-4809-b8b4-dedf442550b3'
-                                                }
-                                            }).then(responce => {
-                                                if (responce.data.resultCode === 0) {
-                                                    props.follow(u.id);
-                                                }
-                                            })
-                                        )}>follow</button>
+                                        followUser(user.id).then(data => {
+                                            if (data.resultCode === 0) {
+                                                props.follow(user.id);
+                                            }
+                                        })
+                                    )}>follow</button>
                             }
                         </div>
                     </span>
                 <span>
-                        <span>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
-                        </span>
-                        <span>
-                        {/*    <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>*/}
-                        </span>
+                    <span>
+                        <div>{user.name}</div>
+                        <div>{user.status}</div>
                     </span>
+                </span>
             </div>
         )}
     </div>
