@@ -2,7 +2,7 @@ import s from "./Users.module.css";
 import React from "react";
 import defaultImage from '../../assets/images/cat.jpg'
 import {NavLink} from "react-router-dom";
-import {followUser, unfollowUser} from "../../api/api";
+import {followUser, unFollowUser} from "../../api/api";
 
 let Users = (props) => {
 
@@ -35,21 +35,29 @@ let Users = (props) => {
                         <div>
                             {
                                 user.followed ?
-                                    <button onClick={() => (
-                                        unfollowUser(user.id).then(responce => {
+                                    <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                        debugger;
+                                        props.toggleIsFollowing(true, user.id);
+                                        unFollowUser(user.id).then(responce => {
                                             if (responce.resultCode === 0) {
                                                 props.unfollow(user.id);
                                             }
-                                        })
+                                            props.toggleIsFollowing(false, user.id);
+                                        });
 
-                                    )}>unfollow</button> :
-                                    <button onClick={() => (
+                                    }}>unfollow</button> :
+                                    <button
+                                        disabled={props.followingInProgress.some(id => id === user.id)}
+                                        onClick={() => {
+                                        props.toggleIsFollowing(true, user.id);
                                         followUser(user.id).then(data => {
                                             if (data.resultCode === 0) {
                                                 props.follow(user.id);
                                             }
-                                        })
-                                    )}>follow</button>
+                                            props.toggleIsFollowing(false, user.id);
+                                        });
+
+                                    }}>follow</button>
                             }
                         </div>
                     </span>
