@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
                      src='https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701793904.jpg'/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos.large} alt={props.profile.name}/>
                 Ava + description
             </div>
         </div>
