@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'https://social-network.samuraijs.com/';
+const BASE_URL = 'https://social-network.samuraijs.com/api/1.0/';
 
 const instance = axios.create({
     withCredentials: true,
@@ -12,25 +12,43 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`api/1.0/users?page=${currentPage}&count=${pageSize}`)
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data
             });
     },
 
     followUser(userId) {
-        return instance.post(`api/1.0/follow/${userId}`);
+        return instance.post(`follow/${userId}`);
     },
     unFollowUser(userId) {
-        return instance.delete(`api/1.0/follow/${userId}`);
+        return instance.delete(`follow/${userId}`);
     },
     getProfile(userId) {
-        return instance.get(`api/1.0/profile/` + userId);
+        return profileAPI.getProfile(userId);
     }
 };
 
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/` + userId);
+    },
+    getStatus (userId) {
+        return instance.get(`profile/status/` + userId);
+    },
+    updateStatus (status) {
+        return instance.put(
+            `profile/status`,
+            {
+                status: status
+            }
+        );
+    }
+};
+
+
 export const authApi = {
     me() {
-        return instance.get(`api/1.0/auth/me`);
+        return instance.get(`auth/me`);
     }
 }
