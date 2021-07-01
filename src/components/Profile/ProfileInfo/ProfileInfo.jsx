@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
 
-    if(!props.profile || props.profile === undefined)
+    if(!props.profile)
         return <Preloader/>;
 
     return (
