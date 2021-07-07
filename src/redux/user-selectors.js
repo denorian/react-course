@@ -19,9 +19,9 @@ export const getUsersSuperSelector = createSelector( getUsers, (users) => {
  export const getCurrentPage = (state) => {
      return state.usersPage.currentPage;
  };
- export const isFetching = (state) => {
+ export const getIsFetching = (state) => {
      return state.usersPage.isFetching;
  };
- export const followingInProgress = (state) => {
+ export const getFollowingInProgress = (state) => {
      return state.usersPage.followingInProgress;
  };
